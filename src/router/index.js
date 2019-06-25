@@ -26,6 +26,7 @@ class App extends React.Component {
                                     key="sub1"
                                     title={<span><Icon type="user" />d3.js </span>} >
                                     <Menu.Item key="1"><Link to='/graph/force'>力导向图</Link> </Menu.Item>
+                                    <Menu.Item key="2"><Link to='/graph/twoWayTree'>双向树图</Link> </Menu.Item>
                                 </SubMenu>
                             </Menu>
                         </Sider>
@@ -35,7 +36,6 @@ class App extends React.Component {
                                     <Switch>
                                         <Route exact path="/" component={Graph} />
                                         <Route path="/graph" component={Graph} />
-                                        <Route path="/graph/force" component={Force} />
                                         <Route component={NotFound} />
                                     </Switch>
                                 </div>
