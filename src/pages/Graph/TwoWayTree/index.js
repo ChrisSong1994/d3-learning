@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ReactDOM from 'react-dom'
 import * as d3 from "d3"
-import { collapse ,diagonal} from './func'
+import { collapse, diagonal } from './func'
 
 import './index.css';
 
@@ -20,7 +20,13 @@ class TwoWayTree extends Component {
                     {
                         "name": "Level 2: A",
                         "children": [
-                            { "name": "Son of A" },
+                            {
+                                "name": "Son of A",
+                                "children": [
+                                    { "name": "Son of A" },
+                                    { "name": "Daughter of A" }
+                                ]
+                            },
                             { "name": "Daughter of A" }
                         ]
                     },
@@ -32,7 +38,22 @@ class TwoWayTree extends Component {
 
     componentDidMount() {
         const { data } = this.state
-        this.svg = d3.select('.tree').append("g").attr("transform", "translate(" + width / 2 + "," + 0 + ")");
+
+        const svg = this.svg = d3.select('.tree').append("g").attr("transform", "translate(" + width / 2 + "," + 0 + ")");
+        const zoomFun = d3.zoom().scaleExtent([0.1, 100]).on("zoom", () => {
+            this.svg.attr(
+                "transform",
+                "translate(" +
+                (d3.event.transform.x) +
+                "," +
+                (d3.event.transform.y) +
+                ") scale(" +
+                d3.event.transform.k +
+                ")"
+            );
+        });
+        // 这里一定要是对svg 元素的call 
+        d3.select('.tree').call(zoomFun).on("dblclick.zoom", () => { console.log(111) });
         this.treemap = d3.tree().size([height, width / 2]);
         this.root = d3.hierarchy(data, function (d) { return d.children; });
         this.root.x0 = 0;
@@ -56,6 +77,7 @@ class TwoWayTree extends Component {
             .attr("transform", function (d) {
                 return "translate(" + source.y0 + "," + source.x0 + ")";
             })
+            .on('click', this.click);
         nodeEnter.append('circle')
             .attr('class', 'node')
             .attr('r', 1e-6)
@@ -143,7 +165,7 @@ class TwoWayTree extends Component {
 
     }
 
-    click(d){
+    click = (d) => {
         if (d.children) {
             d._children = d.children;
             d.children = null;

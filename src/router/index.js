@@ -32,7 +32,7 @@ class App extends React.Component {
                         </Sider>
                         <Layout style={{ padding: '0 24px 24px' }}>
                             <Content style={{ padding: '0 50px', marginTop: 64 }}>
-                                <div style={{ background: '#fff', padding: 24, minHeight: 1580 }}>
+                                <div style={{ background: '#fff', padding: 24, minHeight: 900 }}>
                                     <Switch>
                                         <Route exact path="/" component={Graph} />
                                         <Route path="/graph" component={Graph} />
