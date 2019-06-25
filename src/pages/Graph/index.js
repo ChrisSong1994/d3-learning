@@ -14,7 +14,6 @@ class Graph extends Component {
             <Router>
                 <Switch>
                     <Route exact path="/graph/force" component={Force} />
-
                 </Switch>
             </Router>
         )
