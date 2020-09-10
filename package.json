@@ -45,7 +45,7 @@
     "webpack-bundle-analyzer": "^3.3.2",
     "webpack-cli": "^3.3.2",
     "webpack-dev-server": "^3.5.1",
-    "yargs-parser": "^13.1.0"
+    "yargs-parser": "^13.1.2"
   },
   "dependencies": {
     "antd": "^3.10.3",
